@@ -26,7 +26,7 @@ function App() {
 
   return (
     <LanguageProvider>
-      <Router>
+      <Router basename={process.env.NODE_ENV === 'production' ? '/agenda-contactos' : ''}>
         <div className={`App ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
           <Navbar isDarkMode={isDarkMode} onToggleTheme={toggleTheme} />
           

@@ -4,48 +4,76 @@ Uma aplicação moderna e responsiva para gerenciar contatos, desenvolvida com R
 
 ## 🚀 Funcionalidades
 
-- ✅ **Adicionar contatos** - Cadastre novos contatos com nome, email e telefone
-- ✏️ **Editar contatos** - Atualize informações de contatos existentes
-- 🗑️ **Excluir contatos** - Remova contatos com confirmação
-- 🔍 **Buscar contatos** - Pesquise por nome, email ou telefone
-- 📱 **Design responsivo** - Interface adaptável para desktop e mobile
-- 🎨 **Interface moderna** - Design atrativo com gradientes e animações
+- ✅ **Gestión completa de contactos** - Agregar, editar y eliminar contactos
+- 🔍 **Búsqueda avanzada** - Filtros múltiples y búsqueda inteligente
+- 📱 **Progressive Web App (PWA)** - Instalable y funciona offline
+- 🌙 **Modo oscuro/claro** - Tema personalizable
+- 🌐 **Internacionalización** - Soporte multiidioma
+- 📊 **Importar/Exportar CSV** - Gestión masiva de contactos
+- 🖼️ **Avatares personalizados** - Subida de imágenes de perfil
+- 🔄 **Integración API** - Sincronización con servicios externos
+- 📱 **Design responsivo** - Interface adaptable para todos los dispositivos
+- 🚀 **Despliegue automático** - CI/CD con GitHub Actions
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologías Utilizadas
 
-- **React** - Biblioteca JavaScript para construção da interface
-- **JSON Server** - API REST falsa para desenvolvimento
-- **CSS3** - Estilização moderna com gradientes e animações
-- **Fetch API** - Para requisições HTTP
+- **React 19** - Biblioteca JavaScript moderna
+- **React Router** - Navegación SPA
+- **JSON Server** - API REST para desarrollo
+- **CSS3** - Estilos modernos con variables CSS
+- **PWA** - Service Workers y Web App Manifest
+- **GitHub Actions** - CI/CD automatizado
+- **GitHub Pages** - Hosting gratuito
+- **i18n** - Internacionalización
+- **CSV Parser** - Importación/exportación de datos
 
 ## 📋 Pré-requisitos
 
 - Node.js (versão 14 ou superior)
 - npm ou yarn
 
-## 🔧 Instalação e Execução
+## 🔧 Instalación y Ejecución
 
-### 1. Clone ou baixe o projeto
+### Desarrollo Local
+
 ```bash
+# 1. Clonar el repositorio
+git clone https://github.com/tu-usuario/agenda-contactos.git
 cd agenda-contactos
-```
 
-### 2. Instale as dependências
-```bash
+# 2. Instalar dependencias
 npm install
-```
 
-### 3. Inicie o JSON Server (API)
-```bash
+# 3. Configurar para GitHub Pages (opcional)
+node setup-github-pages.js tu-usuario-github
+
+# 4. Iniciar JSON Server (API)
 npm run server
-```
-O servidor da API estará disponível em: `http://localhost:3001`
 
-### 4. Em outro terminal, inicie a aplicação React
-```bash
+# 5. Iniciar la aplicación (en otra terminal)
 npm start
 ```
-A aplicação estará disponível em: `http://localhost:3000`
+
+### Despliegue en GitHub Pages
+
+1. **Configuración automática**:
+   ```bash
+   node setup-github-pages.js tu-usuario-github
+   ```
+
+2. **Subir a GitHub**:
+   ```bash
+   git add .
+   git commit -m "Setup GitHub Pages deployment"
+   git push origin main
+   ```
+
+3. **Configurar repositorio**:
+   - Ve a Settings → Pages
+   - Selecciona "GitHub Actions" como source
+   - Habilita permisos de escritura en Actions
+
+📖 **Guía completa**: Ver [DEPLOYMENT.md](./DEPLOYMENT.md)
 
 ## 📁 Estrutura do Projeto
 
@@ -120,25 +148,55 @@ A aplicação é totalmente responsiva e se adapta a diferentes tamanhos de tela
 - **Telefone**: Campo obrigatório
 - **Confirmação**: Confirmação antes de excluir contatos
 
-## 🚀 Possíveis Melhorias
+## 🚀 Características Implementadas
 
-- [ ] Adicionar mais campos (endereço, data de nascimento)
-- [ ] Implementar ordenação (alfabética, data de criação)
-- [ ] Adicionar categorias/grupos de contatos
-- [ ] Exportar contatos (CSV, JSON)
-- [ ] Importar contatos
-- [ ] Backup automático
-- [ ] Modo escuro
-- [ ] Integração com APIs reais
+- ✅ **PWA completa** - Instalable y offline
+- ✅ **Modo oscuro/claro** - Tema personalizable
+- ✅ **Importar/Exportar CSV** - Gestión masiva
+- ✅ **Búsqueda avanzada** - Filtros múltiples
+- ✅ **Avatares personalizados** - Subida de imágenes
+- ✅ **Internacionalización** - Español/Inglés
+- ✅ **Integración API** - Sincronización externa
+- ✅ **CI/CD automatizado** - GitHub Actions
+- ✅ **Responsive design** - Mobile-first
+- ✅ **Validaciones avanzadas** - UX mejorada
 
-## 📄 Licença
+## 🔄 Despliegue Automático
 
-Este projeto foi desenvolvido para fins educacionais como parte do curso de React.
+Este proyecto incluye:
+- **GitHub Actions** para CI/CD
+- **Tests automatizados** en cada push
+- **Build optimizado** para producción
+- **Despliegue automático** a GitHub Pages
+- **Artifacts de build** para debugging
 
-## 👨‍💻 Desenvolvedor
+## 🌐 Demo en Vivo
 
-Projeto desenvolvido seguindo as especificações do curso de React, implementando uma agenda de contatos completa e funcional.
+🔗 **[Ver Demo](https://tu-usuario.github.io/agenda-contactos)**
+
+## 📄 Licencia
+
+Este proyecto fue desarrollado para fines educacionales y demostrativos.
+
+## 👨‍💻 Desarrollo
+
+Proyecto desarrollado con las mejores prácticas de React, incluyendo:
+- Arquitectura de componentes escalable
+- Gestión de estado eficiente
+- Optimizaciones de rendimiento
+- Accesibilidad web (a11y)
+- SEO optimizado
+- Despliegue automatizado
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Por favor:
+1. Fork el proyecto
+2. Crea una rama para tu feature
+3. Commit tus cambios
+4. Push a la rama
+5. Abre un Pull Request
 
 ---
 
-**Divirta-se gerenciando seus contatos! 📱✨**
+**¡Disfruta gestionando tus contactos! 📱✨**
