@@ -6,6 +6,7 @@ import SearchBar from '../components/SearchBar';
 import AdvancedSearch from '../components/AdvancedSearch';
 import CSVManager from '../components/CSVManager';
 import APIIntegration from '../components/APIIntegration';
+import contactsAPI from '../services/contactsAPI';
 import './ViewContacts.css';
 
 function ViewContacts() {
@@ -29,17 +30,13 @@ function ViewContacts() {
   const fetchContacts = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3001/contatos');
-      if (response.ok) {
-        const data = await response.json();
-        setContacts(data);
-        setError('');
-      } else {
-        throw new Error('Error al cargar los contactos');
-      }
+      const data = await contactsAPI.getContacts();
+      setContacts(data);
+      setError('');
     } catch (error) {
       console.error('Error:', error);
-      setError('No se pudieron cargar los contactos. Verifica que el servidor esté funcionando.');
+      setError('Error al cargar los contactos.');
+      setContacts([]);
     } finally {
       setLoading(false);
     }
@@ -72,23 +69,9 @@ function ViewContacts() {
 
   const handleUpdate = async (contactData) => {
     try {
-      const response = await fetch(`http://localhost:3001/contatos/${editingContact.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...contactData,
-          dataModificacao: new Date().toISOString()
-        }),
-      });
-
-      if (response.ok) {
-        await fetchContacts();
-        setEditingContact(null);
-      } else {
-        throw new Error('Error al actualizar el contacto');
-      }
+      await contactsAPI.updateContact(editingContact.id, contactData);
+      await fetchContacts();
+      setEditingContact(null);
     } catch (error) {
       console.error('Error:', error);
       alert('Error al actualizar el contacto');
@@ -98,15 +81,8 @@ function ViewContacts() {
   const handleDelete = async (id) => {
     if (window.confirm(t('confirmDelete'))) {
       try {
-        const response = await fetch(`http://localhost:3001/contatos/${id}`, {
-          method: 'DELETE',
-        });
-
-        if (response.ok) {
-          await fetchContacts();
-        } else {
-          throw new Error('Error al eliminar el contacto');
-        }
+        await contactsAPI.deleteContact(id);
+        await fetchContacts();
       } catch (error) {
         console.error('Error:', error);
         alert('Error al eliminar el contacto');
@@ -120,32 +96,24 @@ function ViewContacts() {
       const addedContacts = [];
       
       for (const contact of importedContacts) {
-        const response = await fetch('http://localhost:3001/contatos', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            ...contact,
-            dataCriacao: new Date().toISOString(),
-            dataModificacao: new Date().toISOString()
-          })
-        });
-        
-        if (response.ok) {
-          const newContact = await response.json();
+        try {
+          const newContact = await contactsAPI.createContact(contact);
           addedContacts.push(newContact);
+        } catch (error) {
+          console.error('Error adding contact:', error);
         }
       }
       
-      // Actualizar la lista de contactos
-      await fetchContacts();
-      
-      alert(`Se importaron ${addedContacts.length} contactos exitosamente`);
-      
+      if (addedContacts.length > 0) {
+        await fetchContacts();
+        setError('');
+        alert(`${addedContacts.length} contactos importados exitosamente`);
+      } else {
+        setError('No se pudieron importar los contactos');
+      }
     } catch (error) {
       console.error('Error:', error);
-      alert('Error al importar contactos');
+      setError('Error al importar contactos');
     }
   };
 
@@ -174,32 +142,28 @@ function ViewContacts() {
       // Procesar contactos externos y agregarlos a la base de datos
       for (const externalContact of externalContactsData) {
         const newContact = {
-          name: externalContact.name,
-          phone: externalContact.phone || '',
-          email: externalContact.email || '',
-          category: externalContact.category || 'Personal',
-          notes: externalContact.notes || '',
-          avatar: externalContact.avatar || null,
-          dateAdded: new Date().toISOString().split('T')[0]
+          nome: externalContact.name || externalContact.nome,
+          email: externalContact.email,
+          telefone: externalContact.phone || externalContact.telefone,
+          endereco: externalContact.address || externalContact.endereco || '',
+          aniversario: externalContact.birthday || externalContact.aniversario || '',
+          notas: externalContact.notes || externalContact.notas || 'Sincronizado desde API externa',
+          categoria: externalContact.category || externalContact.categoria || 'Geral'
         };
-        
-        const response = await fetch('http://localhost:3001/contacts', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newContact),
-        });
-        
-        if (response.ok) {
-          const addedContact = await response.json();
-          setContacts(prevContacts => [...prevContacts, addedContact]);
+
+        try {
+          await contactsAPI.createContact(newContact);
+        } catch (error) {
+          console.error('Error al sincronizar contacto:', externalContact, error);
         }
       }
-      
-      setExternalContacts(externalContactsData);
+
+      // Recargar contactos después de la sincronización
+      await fetchContacts();
+      setError('');
     } catch (error) {
-      console.error('Error syncing external contacts:', error);
+      console.error('Error en sincronización externa:', error);
+      setError('Error al sincronizar contactos externos');
     }
   };
 

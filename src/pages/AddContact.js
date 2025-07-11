@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import ContactForm from '../components/ContactForm';
+import contactsAPI from '../services/contactsAPI';
 import './AddContact.css';
 
 function AddContact() {
@@ -15,26 +16,11 @@ function AddContact() {
     setSubmitMessage('');
     
     try {
-      const response = await fetch('http://localhost:3001/contatos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...contactData,
-          dataCriacao: new Date().toISOString(),
-          dataModificacao: new Date().toISOString()
-        }),
-      });
-
-      if (response.ok) {
-        setSubmitMessage(t('contactAdded'));
-        setTimeout(() => {
-          navigate('/contactos');
-        }, 1500);
-      } else {
-        throw new Error('Error al agregar el contacto');
-      }
+      await contactsAPI.createContact(contactData);
+      setSubmitMessage(t('contactAdded'));
+      setTimeout(() => {
+        navigate('/contactos');
+      }, 1500);
     } catch (error) {
       console.error('Error:', error);
       setSubmitMessage(t('error'));
