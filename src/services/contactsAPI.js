@@ -79,67 +79,92 @@ const generateId = () => {
   return Math.random().toString(36).substr(2, 4);
 };
 
-// API para desarrollo (JSON Server)
+// API para desarrollo (JSON Server con fallback a localStorage)
 const devAPI = {
   async getContacts() {
-    const response = await fetch(`${API_BASE_URL}/contatos`);
-    if (!response.ok) {
-      throw new Error('Error al cargar los contactos');
+    try {
+      const response = await fetch(`${API_BASE_URL}/contatos`);
+      if (!response.ok) {
+        throw new Error('JSON Server no disponible');
+      }
+      return response.json();
+    } catch (error) {
+      console.warn('JSON Server no disponible, usando localStorage:', error.message);
+      return prodAPI.getContacts();
     }
-    return response.json();
   },
 
   async getContact(id) {
-    const response = await fetch(`${API_BASE_URL}/contatos/${id}`);
-    if (!response.ok) {
-      throw new Error('Error al cargar el contacto');
+    try {
+      const response = await fetch(`${API_BASE_URL}/contatos/${id}`);
+      if (!response.ok) {
+        throw new Error('JSON Server no disponible');
+      }
+      return response.json();
+    } catch (error) {
+      console.warn('JSON Server no disponible, usando localStorage:', error.message);
+      return prodAPI.getContact(id);
     }
-    return response.json();
   },
 
   async createContact(contact) {
-    const response = await fetch(`${API_BASE_URL}/contatos`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...contact,
-        dataCriacao: new Date().toISOString(),
-        dataModificacao: new Date().toISOString()
-      }),
-    });
-    if (!response.ok) {
-      throw new Error('Error al crear el contacto');
+    try {
+      const response = await fetch(`${API_BASE_URL}/contatos`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...contact,
+          dataCriacao: new Date().toISOString(),
+          dataModificacao: new Date().toISOString()
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('JSON Server no disponible');
+      }
+      return response.json();
+    } catch (error) {
+      console.warn('JSON Server no disponible, usando localStorage:', error.message);
+      return prodAPI.createContact(contact);
     }
-    return response.json();
   },
 
   async updateContact(id, contact) {
-    const response = await fetch(`${API_BASE_URL}/contatos/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...contact,
-        dataModificacao: new Date().toISOString()
-      }),
-    });
-    if (!response.ok) {
-      throw new Error('Error al actualizar el contacto');
+    try {
+      const response = await fetch(`${API_BASE_URL}/contatos/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...contact,
+          dataModificacao: new Date().toISOString()
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('JSON Server no disponible');
+      }
+      return response.json();
+    } catch (error) {
+      console.warn('JSON Server no disponible, usando localStorage:', error.message);
+      return prodAPI.updateContact(id, contact);
     }
-    return response.json();
   },
 
   async deleteContact(id) {
-    const response = await fetch(`${API_BASE_URL}/contatos/${id}`, {
-      method: 'DELETE',
-    });
-    if (!response.ok) {
-      throw new Error('Error al eliminar el contacto');
+    try {
+      const response = await fetch(`${API_BASE_URL}/contatos/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('JSON Server no disponible');
+      }
+      return true;
+    } catch (error) {
+      console.warn('JSON Server no disponible, usando localStorage:', error.message);
+      return prodAPI.deleteContact(id);
     }
-    return true;
   }
 };
 
