@@ -1,0 +1,350 @@
+/* Estilos para el componente AvatarUploader */
+
+.avatar-uploader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin: 16px 0;
+}
+
+.avatar-preview {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--border-color);
+  background: var(--input-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.avatar-preview:hover {
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+  color: var(--text-secondary);
+}
+
+.avatar-placeholder-icon {
+  font-size: 3rem;
+  opacity: 0.6;
+}
+
+.avatar-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.avatar-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.avatar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 300px;
+}
+
+.avatar-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--button-background);
+  color: var(--button-text);
+  border: 1px solid var(--border-color);
+}
+
+.avatar-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.avatar-btn:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.avatar-btn:not(:disabled):active {
+  transform: translateY(0);
+}
+
+.avatar-btn-upload {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border-color: #4CAF50;
+}
+
+.avatar-btn-upload:not(:disabled):hover {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+}
+
+.avatar-btn-initials {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+  border-color: #2196F3;
+}
+
+.avatar-btn-initials:not(:disabled):hover {
+  background: linear-gradient(135deg, #1976D2, #1565C0);
+}
+
+.avatar-btn-remove {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  color: white;
+  border-color: #f44336;
+}
+
+.avatar-btn-remove:not(:disabled):hover {
+  background: linear-gradient(135deg, #d32f2f, #c62828);
+}
+
+.avatar-info {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  max-width: 250px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .avatar-uploader {
+    padding: 16px;
+  }
+  
+  .avatar-preview {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .avatar-placeholder-icon {
+    font-size: 2.5rem;
+  }
+  
+  .avatar-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .avatar-btn {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar-preview {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .avatar-placeholder-icon {
+    font-size: 2rem;
+  }
+  
+  .avatar-btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .avatar-spinner {
+    width: 24px;
+    height: 24px;
+    border-width: 2px;
+  }
+}
+
+/* Tema oscuro */
+[data-theme="dark"] .avatar-uploader {
+  background: var(--card-background);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .avatar-preview {
+  border-color: var(--border-color);
+  background: var(--input-background);
+}
+
+[data-theme="dark"] .avatar-placeholder {
+  background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
+}
+
+[data-theme="dark"] .avatar-loading {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .avatar-btn {
+  background: var(--button-background);
+  color: var(--button-text);
+  border-color: var(--border-color);
+}
+
+/* Animaciones adicionales */
+.avatar-preview {
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-preview::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.avatar-preview:hover::before {
+  animation: shimmer 1s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Estados de focus para accesibilidad */
+.avatar-btn:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Efectos de hover mejorados */
+.avatar-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.avatar-btn:not(:disabled):hover::before {
+  left: 100%;
+}
+
+/* Indicadores de estado */
+.avatar-uploader.uploading .avatar-preview {
+  pointer-events: none;
+}
+
+.avatar-uploader.uploading .avatar-btn {
+  opacity: 0.7;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .avatar-preview,
+  .avatar-btn,
+  .avatar-spinner {
+    animation: none;
+    transition: none;
+  }
+  
+  .avatar-preview:hover {
+    transform: none;
+  }
+  
+  .avatar-btn:not(:disabled):hover {
+    transform: none;
+  }
+}
+
+/* Soporte para modo de alto contraste */
+@media (prefers-contrast: high) {
+  .avatar-preview {
+    border-width: 4px;
+  }
+  
+  .avatar-btn {
+    border-width: 2px;
+    font-weight: 600;
+  }
+  
+  .avatar-placeholder {
+    background: #ffffff;
+    color: #000000;
+  }
+}
+
+/* Drag and drop visual feedback (para futuras mejoras) */
+.avatar-uploader.drag-over .avatar-preview {
+  border-color: var(--primary-color);
+  background: rgba(33, 150, 243, 0.1);
+  transform: scale(1.05);
+}
+
+.avatar-uploader.drag-over .avatar-placeholder {
+  background: rgba(33, 150, 243, 0.1);
+}

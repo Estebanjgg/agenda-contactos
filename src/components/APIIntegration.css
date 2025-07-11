@@ -1,0 +1,553 @@
+/* Estilos para el componente APIIntegration */
+
+.api-integration {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin: 20px 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.api-integration:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.api-integration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.api-integration-header h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.api-integration-header .icon {
+  font-size: 1.2rem;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status-indicator {
+  font-size: 0.8rem;
+  animation: pulse 2s infinite;
+}
+
+.status-indicator.connected {
+  animation: none;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.api-integration-content {
+  padding: 20px;
+}
+
+.config-section {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.config-section:last-of-type {
+  border-bottom: none;
+}
+
+.config-section h4 {
+  margin: 0 0 12px 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.provider-selection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.provider-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--input-background);
+}
+
+.provider-option:hover {
+  border-color: var(--primary-color);
+  background: var(--hover-background);
+}
+
+.provider-option input[type="radio"] {
+  margin: 0;
+}
+
+.provider-option input[type="radio"]:checked + .provider-info {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.provider-option:has(input:checked) {
+  border-color: var(--primary-color);
+  background: var(--primary-background);
+}
+
+.provider-option:has(input:disabled) {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.provider-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.provider-icon {
+  font-size: 1.2rem;
+}
+
+.provider-name {
+  font-weight: 500;
+}
+
+.sync-direction,
+.sync-interval {
+  margin-bottom: 16px;
+}
+
+.sync-direction label,
+.sync-interval label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.sync-direction select,
+.sync-interval select {
+  width: 100%;
+  max-width: 200px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--input-background);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin: 0;
+  transform: scale(1.1);
+}
+
+.actions-section {
+  margin-bottom: 20px;
+}
+
+.connect-btn,
+.sync-btn,
+.disconnect-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.connect-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+}
+
+.connect-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #45a049, #3d8b40);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.sync-btn {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+}
+
+.sync-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1976D2, #1565C0);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+.disconnect-btn {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  color: white;
+}
+
+.disconnect-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #d32f2f, #c62828);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+
+.connect-btn:disabled,
+.sync-btn:disabled,
+.disconnect-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.connected-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.status-section {
+  margin-bottom: 20px;
+}
+
+.sync-status {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.sync-status.success {
+  background: var(--success-background);
+  color: var(--success-color);
+  border: 1px solid var(--success-border);
+}
+
+.sync-status.error {
+  background: var(--error-background);
+  color: var(--error-color);
+  border: 1px solid var(--error-border);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sync-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  padding: 16px;
+  background: var(--background-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.help-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.help-section details {
+  cursor: pointer;
+}
+
+.help-section summary {
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 8px 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.help-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.help-section summary::before {
+  content: '▶';
+  transition: transform 0.2s ease;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.help-section details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.help-content {
+  padding: 12px 0;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.help-content p {
+  margin: 0 0 8px 0;
+  font-size: 0.9rem;
+}
+
+.help-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .api-integration-content {
+    padding: 16px;
+  }
+  
+  .provider-selection {
+    grid-template-columns: 1fr;
+  }
+  
+  .connected-actions {
+    flex-direction: column;
+  }
+  
+  .connect-btn,
+  .sync-btn,
+  .disconnect-btn {
+    width: 100%;
+  }
+  
+  .sync-info {
+    grid-template-columns: 1fr;
+  }
+  
+  .api-integration-header {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .api-integration-header {
+    padding: 12px 16px;
+  }
+  
+  .api-integration-header h3 {
+    font-size: 1rem;
+  }
+  
+  .provider-option {
+    padding: 10px;
+  }
+  
+  .connect-btn,
+  .sync-btn,
+  .disconnect-btn {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Tema oscuro */
+[data-theme="dark"] .api-integration {
+  background: var(--card-background);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .api-integration-header {
+  background: linear-gradient(135deg, #4a5568, #2d3748);
+}
+
+[data-theme="dark"] .provider-option {
+  background: var(--input-background);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .provider-option:hover {
+  background: var(--hover-background);
+}
+
+[data-theme="dark"] .sync-info {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .sync-direction select,
+[data-theme="dark"] .sync-interval select {
+  background: var(--input-background);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Animaciones adicionales */
+.provider-option {
+  position: relative;
+  overflow: hidden;
+}
+
+.provider-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.provider-option:hover::before {
+  left: 100%;
+}
+
+/* Estados de focus para accesibilidad */
+.connect-btn:focus,
+.sync-btn:focus,
+.disconnect-btn:focus,
+.provider-option:focus-within {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .api-integration,
+  .connect-btn,
+  .sync-btn,
+  .disconnect-btn,
+  .provider-option,
+  .spinner,
+  .status-indicator {
+    animation: none;
+    transition: none;
+  }
+  
+  .connect-btn:hover:not(:disabled),
+  .sync-btn:hover:not(:disabled),
+  .disconnect-btn:hover:not(:disabled) {
+    transform: none;
+  }
+}
+
+/* Soporte para modo de alto contraste */
+@media (prefers-contrast: high) {
+  .api-integration {
+    border-width: 2px;
+  }
+  
+  .provider-option {
+    border-width: 2px;
+  }
+  
+  .connect-btn,
+  .sync-btn,
+  .disconnect-btn {
+    border: 2px solid currentColor;
+    font-weight: 700;
+  }
+  
+  .sync-status {
+    border-width: 2px;
+    font-weight: 600;
+  }
+}
+
+/* Efectos de carga */
+.api-integration.loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.api-integration.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
